@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coming Soon Page</title>
+
+    <!-- Alpine cdn  -->
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Font Awesome cdn -->
+    <script
+      src="https://kit.fontawesome.com/2b00ee95cf.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Css  -->
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body class="antialiased font-primary">
+    <div class="py-12 px-8 w-full min-h-screen bgHero">
+      <div class="md:max-w-2xl lg:max-w-3xl mx-auto">
+        <!-- Counndown timer  -->
+        <div
+          class="flex flex-wrap justify-center gap-4"
+          x-data="timer()"
+          x-init="countdown()"
+        >
+          <div class="timerCircle">
+            <div>
+              <span class="timerCount" x-text="days"></span>
+              <span class="timerType">Days</span>
+            </div>
+          </div>
+          <div class="timerCircle">
+            <div>
+              <span class="timerCount" x-text="hours"></span>
+              <span class="timerType">Hours</span>
+            </div>
+          </div>
+          <div class="timerCircle">
+            <div>
+              <span class="timerCount" x-text="minutes"></span>
+              <span class="timerType">Minutes</span>
+            </div>
+          </div>
+          <div class="timerCircle">
+            <div>
+              <span class="timerCount" x-text="seconds"></span>
+              <span class="timerType">Seconds</span>
+            </div>
+          </div>
+        </div>
+        <!-- COuntdown timer end  -->
+
+        <div class="mt-8 text-white text-center">
+          <h1 class="font-bold text-4xl md:text-5xl">Project Coming Soon</h1>
+          <p class="pt-4 text-xl md:text-xl">
+            We’re working hard to launch our new line… and it’s going to be
+            AWESOME! So for now, join us on social media at…
+          </p>
+        </div>
+
+        <form action="" class="mt-8 md:flex md:max-w-xl md:mx-auto">
+          <input
+            type="email"
+            placeholder="Email address"
+            class="px-8 h-14 rounded-full w-full placeholder-gray-700 flex-grow md:rounded-r-none"
+            id="email"
+          />
+          <button
+            type="submit"
+            class="bg-pink-800 text-white uppercase font-bold text-sm text-center w-full md:w-48 px-8 h-14 mt-4 rounded-full md:rounded-l-none md:mt-0"
+          >
+            Sign up
+          </button>
+        </form>
+      </div>
+
+      <div class="mt-20 md:mt-64">
+        <footer>
+          <div class="mx-auto text-pink-800 text-lg space-x-2 text-center mt-4">
+            <a href="#" class="socialLink">
+              <i class="fab fa-instagram m-auto"></i>
+            </a>
+
+            <a href="#" class="socialLink">
+              <i class="fab fa-twitter m-auto"></i>
+            </a>
+
+            <a href="#" class="socialLink">
+              <i class="fab fa-reddit-alien m-auto"></i>
+            </a>
+
+            <a href="#" class="socialLink">
+              <i class="fab fa-github m-auto"></i>
+            </a>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- script  -->
+    <script>
+      function timer() {
+        return {
+          days: "00",
+          hours: "00",
+          minutes: "00",
+          seconds: "00",
+          endTime: new Date("August 15, 2022 23:59:59 GMT+0530").getTime(),
+          now: new Date().getTime(),
+
+          timeLeft: 0,
+          countdown: function () {
+            let counter = setInterval(() => {
+              this.now = new Date().getTime();
+              this.timeLeft = (this.endTime - this.now) / 1000;
+              this.seconds = this.format(this.timeLeft % 60);
+              this.minutes = this.format(this.timeLeft / 60) % 60;
+              this.hours = this.format(this.timeLeft / (60 * 60)) % 24;
+              this.days = this.format(this.timeLeft / (60 * 60 * 24));
+
+              if (this.timeLeft <= 0) {
+                clearInterval(counter);
+                this.days = "00";
+                this.hours = "00";
+                this.minutes = "00";
+                this.seconds = "00";
+              }
+            }, 1000);
+          },
+
+          format: function (value) {
+            if (value < 30) {
+              return "0" + Math.floor(value);
+            } else {
+              return Math.floor(value);
+            }
+          },
+        };
+      }
+    </script>
+  </body>
+</html>
